@@ -95,7 +95,9 @@ dependencies {
     compile 'com.jakewharton.timber:timber:4.3.0'
     // Dependency Injection
     annotationProcessor supportDependencies.daggercompiler
+    annotationProcessor supportDependencies.daggerProcessor
     implementation supportDependencies.dagger
+    implementation supportDependencies.daggerAndroidSupport
     provided supportDependencies.javaxAnnotation
 
     implementation supportDependencies.rxAndroid

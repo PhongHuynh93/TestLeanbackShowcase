@@ -9,4 +9,15 @@ import dagger.Module;
 public abstract class ActivityBuilder {
 //    @ContributesAndroidInjector(modules = MainActivityModule.class)
 //    abstract MainActivity bindMainActivity();
+
+//    @Binds
+//    @IntoMap
+//    @ActivityKey(MainActivity.class)
+//    abstract AndroidInjector.Factory<? extends Activity> bindMainActivity(MainActivityComponent.Builder builder);
+
+//    @Binds
+//    @IntoMap
+//    @ActivityKey(DetailActivity.class)
+//    abstract AndroidInjector.Factory<? extends Activity> bindDetailActivity(DetailActivityComponent.Builder builder);
+
 }

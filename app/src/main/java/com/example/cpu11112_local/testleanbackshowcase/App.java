@@ -29,7 +29,7 @@ public class App extends MultiDexApplication implements HasActivityInjector, Has
         super.onCreate();
 
         DaggerAppComponent.builder()
-                .application(this)
+                .testapplication(this)
                 .build()
                 .inject(this);
     }

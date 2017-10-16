@@ -108,6 +108,8 @@ dependencies {
     implementation supportDependencies.okhttpLog
     implementation supportDependencies.retrofitmoshi
     implementation supportDependencies.retrofitrx
+    implementation supportDependencies.retrofitgson
+    implementation supportDependencies.gson
 
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'

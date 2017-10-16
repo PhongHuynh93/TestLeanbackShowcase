@@ -4,6 +4,13 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+
+// version information
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
@@ -11,8 +18,9 @@ android {
         applicationId "com.example.cpu11112_local.testleanbackshowcase"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -20,10 +28,107 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude '.readme'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/README.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/maven/com.squareup.okhttp/okhttp/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okhttp/okhttp/pom.properties'
+        exclude 'META-INF/maven/com.squareup/otto/pom.xml'
+        exclude 'META-INF/maven/com.squareup/otto/pom.properties'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
+
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lint")) {
+        task.enabled = false
+    }
+}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:leanback-v17:26.1.0'
+
+    // Google Support Libraries
+    implementation supportDependencies.appCompat
+    implementation supportDependencies.cardView
+    implementation supportDependencies.supportAnnotation
+    implementation supportDependencies.palette
+    implementation supportDependencies.design
+    implementation supportDependencies.recyclerView
+    implementation supportDependencies.customtabs
+    implementation supportDependencies.leanback
+    implementation supportDependencies.recommendation
+    implementation supportDependencies.leanbackPreference
+
+    implementation supportDependencies.lifeCycleExtension
+    annotationProcessor supportDependencies.lifeCycleCompiler // not needed if you are using the DefaultLifecycleObserver from common-java8 artifact.
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    // Logging
+    compile 'com.jakewharton.timber:timber:4.3.0'
+    // Dependency Injection
+    annotationProcessor supportDependencies.daggercompiler
+    implementation supportDependencies.dagger
+    provided supportDependencies.javaxAnnotation
+
+    implementation supportDependencies.rxAndroid
+    implementation supportDependencies.rxJava
+
+    implementation supportDependencies.retrofit
+    implementation supportDependencies.okhttp
+    implementation supportDependencies.okhttpLog
+    implementation supportDependencies.retrofitmoshi
+    implementation supportDependencies.retrofitrx
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile('com.mikepenz:aboutlibraries:5.9.7@aar') {
+        transitive = true
+    }
+
+    compile 'com.android.support:multidex:1.0.1'   // add this in  dependencies
+//    implementation supportDependencies.lombok
+
+    implementation supportDependencies.room
+    annotationProcessor supportDependencies.roomCompiler
+}
+
+
+// force to use this version, because there are conflicts in leanback library and life architecture
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion rootProject.ext.supportLibrary
+            }
+        }
+    }
 }

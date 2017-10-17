@@ -90,7 +90,9 @@ dependencies {
     implementation supportDependencies.lifeCycleExtension
     annotationProcessor supportDependencies.lifeCycleCompiler // not needed if you are using the DefaultLifecycleObserver from common-java8 artifact.
 
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
+    implementation supportDependencies.glide
+    annotationProcessor supportDependencies.glideAnnotation
     // Logging
     compile 'com.jakewharton.timber:timber:4.3.0'
     // Dependency Injection

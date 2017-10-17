@@ -11,4 +11,42 @@
         <!--step - only custom the margin top in the browse fragment-->
         <item name="browseRowsMarginTop">275dp</item>
     </style>
+
+    // step - apply when we didnt supply the style to card
+    <style name="DefaultCardTheme" parent="Theme.Leanback">
+        <item name="imageCardViewStyle">@style/DefaultCardStyle</item>
+        <item name="imageCardViewImageStyle">@style/DefaultCardImageStyle</item>
+    </style>
+    <!-- A default card style. Used in cards example. -->
+    <style name="DefaultCardImageStyle" parent="Widget.Leanback.ImageCardView.ImageStyle">
+        <item name="android:layout_width">@dimen/default_image_card_width</item>
+        <item name="android:layout_height">@dimen/default_image_card_height</item>
+    </style>
+
+    <!-- step - Theme corresponding to the SingleLineCardStyle , in the browserfragment-->
+    <style name="SingleLineCardTheme" parent="Theme.Leanback">
+        <item name="imageCardViewStyle">@style/SingleLineCardStyle</item>
+        <item name="imageCardViewTitleStyle">@style/SingleLineCardTitleStyle</item>
+        <item name="imageCardViewImageStyle">@style/SingleLineCardImageStyle</item>
+        <item name="imageCardViewInfoAreaStyle">@style/SingleLineCardInfoAreaStyle</item>
+    </style>
+    <style name="DefaultCardStyle" parent="Widget.Leanback.ImageCardViewStyle">
+        <item name="cardBackground">@null</item>
+    </style>
+    <style name="SingleLineCardStyle" parent="DefaultCardStyle">
+        <item name="lbImageCardViewType">Title</item>
+    </style>
+    <!-- Squared single line card with colored footer style. Used in cards example. -->
+    <style name="SingleLineCardTitleStyle" parent="Widget.Leanback.ImageCardView.TitleStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="SingleLineCardImageStyle" parent="Widget.Leanback.ImageCardView.ImageStyle">
+        <item name="android:layout_width">@dimen/square_image_card_width</item>
+        <item name="android:layout_height">@dimen/square_image_card_height</item>
+    </style>
+    <style name="SingleLineCardInfoAreaStyle" parent="Widget.Leanback.ImageCardView.InfoAreaStyle">
+        <item name="android:layout_width">@dimen/square_image_card_width</item>
+        <item name="layout_viewType">main</item>
+    </style>
 </resources>

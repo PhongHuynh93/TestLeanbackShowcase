@@ -49,6 +49,11 @@ public abstract class AbstractCardPresenter <T extends BaseCardView> extends Pre
      */
     public abstract void onBindViewHolder(Card card, T cardView);
 
+    @Override public final void onBindViewHolder(ViewHolder viewHolder, Object item) {
+        Card card = (Card) item;
+        onBindViewHolder(card, (T) viewHolder.view);
+    }
+
 
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) {

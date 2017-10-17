@@ -7,6 +7,7 @@ ext {
     daggerVersion = '2.11'
     okHttpVersion = '3.4.1'
     architectureComponent = '1.0.0-beta1'
+    glide = '4.2.0'
 
 
     //Support Libraries dependencies
@@ -46,6 +47,8 @@ ext {
             daggerAndroidSupport:         "com.google.dagger:dagger-android-support:${daggerVersion}",
             javaxAnnotation:         "javax.annotation:jsr250-api:1.0",
 
-            lombok: "org.projectlombok:lombok:1.16.18"
+            lombok: "org.projectlombok:lombok:1.16.18",
+            glide: 'com.github.bumptech.glide:glide:4.2.0',
+            glideAnnotation: 'com.github.bumptech.glide:compiler:4.2.0'
     ]
 }

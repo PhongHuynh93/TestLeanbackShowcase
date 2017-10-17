@@ -1,5 +1,6 @@
 package com.example.cpu11112_local.testleanbackshowcase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v17.leanback.app.BrowseFragment;
@@ -11,7 +12,9 @@ import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.PresenterSelector;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v4.app.ActivityOptionsCompat;
 
+import com.example.cpu11112_local.testleanbackshowcase.card.ui.CardExampleActivity;
 import com.example.cpu11112_local.testleanbackshowcase.models.Card;
 import com.example.cpu11112_local.testleanbackshowcase.models.CardRow;
 import com.example.cpu11112_local.testleanbackshowcase.utils.Utils;
@@ -80,7 +83,27 @@ public class MainFragment extends BrowseFragment implements MainView {
     private final class ItemViewClickedListener implements OnItemViewClickedListener {
         @Override
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+            Intent intent = null;
+            Card card = (Card) item;
+            // info - should declare intdef
+            int id = card.getId();
+            switch (id) {
+                case 0:
+                    intent = new Intent(getActivity().getBaseContext(), CardExampleActivity.class);
+            }
 
+            if (intent != null) {
+                /**
+                 step - or we want the share transition
+                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                 this,
+                 ((VideoCardView) itemViewHolder.view).getPreviewCard(),
+                 MovieDetailsFragment.TRANSITION_NAME).toBundle();
+                 */
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                        .toBundle();
+                startActivity(intent, bundle);
+            }
         }
     }
 

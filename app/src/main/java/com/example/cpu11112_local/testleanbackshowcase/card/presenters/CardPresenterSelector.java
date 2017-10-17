@@ -21,6 +21,23 @@ public class CardPresenterSelector extends PresenterSelector {
         mContext = context;
     }
 
+    /**
+     * choose the correct presenter, there are 2 types:
+     * 1. item OBject is one of type
+     public Presenter getPresenter(Object item) {
+     if (item instanceof LoadingCardView) {
+     return mLoadingPresenter;
+     } else if (item instanceof Option) {
+     return mIconItemPresenter;
+     }
+     // is the MoviePresenter
+     return mPresenter;
+     }
+
+     2. depend on type of one object
+     * @param item
+     * @return
+     */
     @Override
     public Presenter getPresenter(Object item) {
         if (!(item instanceof Card)) throw new RuntimeException(
@@ -70,6 +87,7 @@ public class CardPresenterSelector extends PresenterSelector {
 //                    presenter = new CharacterCardPresenter(mContext);
 //                    break;
                 default:
+                    // step - this type for the first screen, the screen in browsefragment
                     presenter = new ImageCardViewPresenter(mContext);
                     break;
             }

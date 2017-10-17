@@ -5,52 +5,60 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.DetailsFragment;
 import android.support.v17.leanback.app.DetailsFragmentBackgroundController;
-import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
-import android.support.v17.leanback.widget.ClassPresenterSelector;
 import android.support.v17.leanback.widget.DetailsOverviewRow;
-import android.support.v17.leanback.widget.FullWidthDetailsOverviewRowPresenter;
-import android.support.v17.leanback.widget.FullWidthDetailsOverviewSharedElementHelper;
-import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
-import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.OnItemViewSelectedListener;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.cpu11112_local.testleanbackshowcase.R;
-import com.example.cpu11112_local.testleanbackshowcase.card.presenters.CardPresenterSelector;
-import com.example.cpu11112_local.testleanbackshowcase.card.presenters.DetailsDescriptionPresenter;
-import com.example.cpu11112_local.testleanbackshowcase.models.Card;
 import com.example.cpu11112_local.testleanbackshowcase.models.DetailedCard;
 import com.example.cpu11112_local.testleanbackshowcase.utils.CardListRow;
-import com.example.cpu11112_local.testleanbackshowcase.utils.Utils;
-import com.google.gson.Gson;
+import com.example.cpu11112_local.testleanbackshowcase.utils.Constant;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import dagger.android.AndroidInjection;
 
 /**
  * Created by CPU11112-local on 10/17/2017.
  */
 
-public class DetailViewExampleFragment  extends DetailsFragment implements OnItemViewClickedListener,
+public class DetailViewExampleFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
     public static final String TRANSITION_NAME = "t_for_transition";
     public static final String EXTRA_CARD = "card";
-    private static final long ACTION_BUY = 1;
-    private static final long ACTION_WISHLIST = 2;
-    private static final long ACTION_RELATED = 3;
-    private Action mActionBuy;
-    private Action mActionWishList;
-    private Action mActionRelated;
-    private ArrayObjectAdapter mRowsAdapter;
-    private final DetailsFragmentBackgroundController mDetailsBackground =
-            new DetailsFragmentBackgroundController(this);
+    public static final long ACTION_BUY = 1;
+    public static final long ACTION_WISHLIST = 2;
+    public static final long ACTION_RELATED = 3;
+    //    private Action mActionBuy;
+//    private Action mActionWishList;
+//    private Action mActionRelated;
+    @Inject
+    @Named(Constant.BIG_ADAPTER)
+    ArrayObjectAdapter mRowsAdapter;
+    @Inject
+    DetailsFragmentBackgroundController mDetailsBackground;
+    @Inject
+    DetailedCard data;
+    @Inject
+    DetailsOverviewRow detailsOverview;
+    @Inject
+    CardListRow cardListRow;
+    @Inject
+    ListRow listRow;
 
+    //    @Inject
+//    FullWidthDetailsOverviewRowPresenter rowPresenter;
+//    @Inject
+//    ListRowPresenter shadowDisabledRowPresenter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setupUi();
         setupEventListeners();
@@ -59,51 +67,51 @@ public class DetailViewExampleFragment  extends DetailsFragment implements OnIte
     private void setupUi() {
         // Load the card we want to display from a JSON resource. This JSON data could come from
         // anywhere in a real world app, e.g. a server.
-        String json = Utils
-                .inputStreamToString(getResources().openRawResource(R.raw.detail_example));
-        DetailedCard data = new Gson().fromJson(json, DetailedCard.class);
+//        String json = Utils
+//                .inputStreamToString(getResources().openRawResource(R.raw.detail_example));
+//        DetailedCard data = new Gson().fromJson(json, DetailedCard.class);
 
         // Setup fragment
         setTitle(getString(R.string.detail_view_title));
 
-        FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
-                new DetailsDescriptionPresenter(getActivity())) {
+//        FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
+//                new DetailsDescriptionPresenter(getActivity())) {
+//
+//            @Override
+//            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
+//                // Customize Actionbar and Content by using custom colors.
+//                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
+//
+//                View actionsView = viewHolder.view.
+//                        findViewById(R.id.details_overview_actions_background);
+//                actionsView.setBackgroundColor(getActivity().getResources().
+//                        getColor(R.color.detail_view_actionbar_background));
+//
+//                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
+//                detailsView.setBackgroundColor(
+//                        getResources().getColor(R.color.detail_view_background));
+//                return viewHolder;
+//            }
+//        };
 
-            @Override
-            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
-                // Customize Actionbar and Content by using custom colors.
-                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
-
-                View actionsView = viewHolder.view.
-                        findViewById(R.id.details_overview_actions_background);
-                actionsView.setBackgroundColor(getActivity().getResources().
-                        getColor(R.color.detail_view_actionbar_background));
-
-                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
-                detailsView.setBackgroundColor(
-                        getResources().getColor(R.color.detail_view_background));
-                return viewHolder;
-            }
-        };
-
-        FullWidthDetailsOverviewSharedElementHelper mHelper = new FullWidthDetailsOverviewSharedElementHelper();
-        mHelper.setSharedElementEnterTransition(getActivity(), TRANSITION_NAME);
-        rowPresenter.setListener(mHelper);
-        rowPresenter.setParticipatingEntranceTransition(false);
+//        FullWidthDetailsOverviewSharedElementHelper mHelper = new FullWidthDetailsOverviewSharedElementHelper();
+//        mHelper.setSharedElementEnterTransition(getActivity(), TRANSITION_NAME);
+//        rowPresenter.setListener(mHelper);
+//        rowPresenter.setParticipatingEntranceTransition(false);
         prepareEntranceTransition();
 
-        ListRowPresenter shadowDisabledRowPresenter = new ListRowPresenter();
-        shadowDisabledRowPresenter.setShadowEnabled(false);
+//        ListRowPresenter shadowDisabledRowPresenter = new ListRowPresenter();
+//        shadowDisabledRowPresenter.setShadowEnabled(false);
 
         // Setup PresenterSelector to distinguish between the different rows.
-        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
-        rowPresenterSelector.addClassPresenter(DetailsOverviewRow.class, rowPresenter);
-        rowPresenterSelector.addClassPresenter(CardListRow.class, shadowDisabledRowPresenter);
-        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-        mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
+//        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
+//        rowPresenterSelector.addClassPresenter(DetailsOverviewRow.class, rowPresenter);
+//        rowPresenterSelector.addClassPresenter(CardListRow.class, shadowDisabledRowPresenter);
+//        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
+//        mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
 
         // Setup action and detail row.
-        DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
+//        DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
         int imageResId = data.getLocalImageResourceId(getActivity());
 
         Bundle extras = getActivity().getIntent().getExtras();
@@ -111,30 +119,30 @@ public class DetailViewExampleFragment  extends DetailsFragment implements OnIte
             imageResId = extras.getInt(EXTRA_CARD, imageResId);
         }
         detailsOverview.setImageDrawable(getResources().getDrawable(imageResId, null));
-        ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
-
-        mActionBuy = new Action(ACTION_BUY, getString(R.string.action_buy) + data.getPrice());
-        mActionWishList = new Action(ACTION_WISHLIST, getString(R.string.action_wishlist));
-        mActionRelated = new Action(ACTION_RELATED, getString(R.string.action_related));
-
-        actionAdapter.add(mActionBuy);
-        actionAdapter.add(mActionWishList);
-        actionAdapter.add(mActionRelated);
-        detailsOverview.setActionsAdapter(actionAdapter);
+//        ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
+//
+//        mActionBuy = new Action(ACTION_BUY, getString(R.string.action_buy) + data.getPrice());
+//        mActionWishList = new Action(ACTION_WISHLIST, getString(R.string.action_wishlist));
+//        mActionRelated = new Action(ACTION_RELATED, getString(R.string.action_related));
+//
+//        actionAdapter.add(mActionBuy);
+//        actionAdapter.add(mActionWishList);
+//        actionAdapter.add(mActionRelated);
+//        detailsOverview.setActionsAdapter(actionAdapter);
         mRowsAdapter.add(detailsOverview);
 
         // Setup related row.
-        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
-                new CardPresenterSelector(getActivity()));
-        for (Card characterCard : data.getCharacters()) listRowAdapter.add(characterCard);
-        HeaderItem header = new HeaderItem(0, getString(R.string.header_related));
-        mRowsAdapter.add(new CardListRow(header, listRowAdapter, null));
+//        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
+//                new CardPresenterSelector(getActivity()));
+//        for (Card characterCard : data.getCharacters()) listRowAdapter.add(characterCard);
+//        HeaderItem header = new HeaderItem(0, getString(R.string.header_related));
+        mRowsAdapter.add(cardListRow);
 
         // Setup recommended row.
-        listRowAdapter = new ArrayObjectAdapter(new CardPresenterSelector(getActivity()));
-        for (Card card : data.getRecommended()) listRowAdapter.add(card);
-        header = new HeaderItem(1, getString(R.string.header_recommended));
-        mRowsAdapter.add(new ListRow(header, listRowAdapter));
+//        listRowAdapter = new ArrayObjectAdapter(new CardPresenterSelector(getActivity()));
+//        for (Card card : data.getRecommended()) listRowAdapter.add(card);
+//        header = new HeaderItem(1, getString(R.string.header_recommended));
+        mRowsAdapter.add(listRow);
 
         setAdapter(mRowsAdapter);
         new Handler().postDelayed(new Runnable() {

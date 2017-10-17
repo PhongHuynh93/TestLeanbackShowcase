@@ -2,6 +2,6 @@
 <fragment
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardsFragment"
-    android:name="com.example.cpu11112_local.testleanbackshowcase.card.ui.CardExampleFragment"
+    android:name="com.example.cpu11112_local.testleanbackshowcase.card.ui.cardbrowser.CardExampleFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"></fragment>

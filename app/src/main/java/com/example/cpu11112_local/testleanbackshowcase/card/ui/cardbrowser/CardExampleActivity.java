@@ -1,8 +1,7 @@
-package com.example.cpu11112_local.testleanbackshowcase.card.ui;
+package com.example.cpu11112_local.testleanbackshowcase.card.ui.cardbrowser;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 
 import com.example.cpu11112_local.testleanbackshowcase.R;
@@ -12,9 +11,10 @@ import com.example.cpu11112_local.testleanbackshowcase.R;
  */
 
 public class CardExampleActivity extends Activity {
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cards_example);
     }
 }

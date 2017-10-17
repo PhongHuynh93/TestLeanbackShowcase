@@ -46,7 +46,7 @@
         </activity>
 
         <activity
-            android:name=".card.ui.CardExampleActivity"
+            android:name=".card.ui.cardbrowser.CardExampleActivity"
             android:exported="true"
             android:theme="@style/Theme.Example.LeanbackBrowse"/>
     </application>

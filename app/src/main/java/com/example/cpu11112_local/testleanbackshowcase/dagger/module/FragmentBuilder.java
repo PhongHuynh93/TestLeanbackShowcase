@@ -1,6 +1,7 @@
 package com.example.cpu11112_local.testleanbackshowcase.dagger.module;
 
 import com.example.cpu11112_local.testleanbackshowcase.MainFragment;
+import com.example.cpu11112_local.testleanbackshowcase.card.ui.cardbrowser.CardExampleFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -12,4 +13,7 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class FragmentBuilder {
     @ContributesAndroidInjector(modules = MainFragmentModule.class)
     abstract MainFragment bindMainFragment();
+
+    @ContributesAndroidInjector(modules = CardBrowserFragmentModule.class)
+    abstract CardExampleFragment bindCardExampleFragment();
 }

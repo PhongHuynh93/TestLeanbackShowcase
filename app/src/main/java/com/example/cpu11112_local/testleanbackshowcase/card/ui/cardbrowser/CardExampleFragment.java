@@ -53,7 +53,7 @@ public class CardExampleFragment extends BrowseFragment {
             @Override
             public void run() {
                 createRows();
-                // show the anim after 0.5ms
+                // step - show the anim after 0.5ms and after loading the rows
                 startEntranceTransition();
             }
         }, 500);

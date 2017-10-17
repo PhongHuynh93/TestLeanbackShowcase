@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.PresenterSelector;
 
+import com.example.cpu11112_local.testleanbackshowcase.R;
 import com.example.cpu11112_local.testleanbackshowcase.models.Card;
 
 import java.util.HashMap;
@@ -53,27 +54,27 @@ public class CardPresenterSelector extends PresenterSelector {
 //                case VIDEO_GRID:
 //                    presenter = new VideoCardViewPresenter(mContext, R.style.VideoGridCardTheme);
 //                    break;
-//                case MOVIE:
-//                case MOVIE_BASE:
-//                case MOVIE_COMPLETE:
-//                case SQUARE_BIG:
-//                case GRID_SQUARE:
-//                case GAME: {
-//                    int themeResId = R.style.MovieCardSimpleTheme;
-//                    if (card.getType() == Card.Type.MOVIE_BASE) {
-//                        themeResId = R.style.MovieCardBasicTheme;
-//                    } else if (card.getType() == Card.Type.MOVIE_COMPLETE) {
-//                        themeResId = R.style.MovieCardCompleteTheme;
-//                    } else if (card.getType() == Card.Type.SQUARE_BIG) {
-//                        themeResId = R.style.SquareBigCardTheme;
-//                    } else if (card.getType() == Card.Type.GRID_SQUARE) {
-//                        themeResId = R.style.GridCardTheme;
-//                    } else if (card.getType() == Card.Type.GAME) {
-//                        themeResId = R.style.GameCardTheme;
-//                    }
-//                    presenter = new ImageCardViewPresenter(mContext, themeResId);
-//                    break;
-//                }
+                case MOVIE:
+                case MOVIE_BASE:
+                case MOVIE_COMPLETE:
+                case SQUARE_BIG:
+                case GRID_SQUARE:
+                case GAME: {
+                    int themeResId = R.style.MovieCardSimpleTheme;
+                    if (card.getType() == Card.Type.MOVIE_BASE) {
+                        themeResId = R.style.MovieCardBasicTheme;
+                    } else if (card.getType() == Card.Type.MOVIE_COMPLETE) {
+                        themeResId = R.style.MovieCardCompleteTheme;
+                    } else if (card.getType() == Card.Type.SQUARE_BIG) {
+                        themeResId = R.style.SquareBigCardTheme;
+                    } else if (card.getType() == Card.Type.GRID_SQUARE) {
+                        themeResId = R.style.GridCardTheme;
+                    } else if (card.getType() == Card.Type.GAME) {
+                        themeResId = R.style.GameCardTheme;
+                    }
+                    presenter = new ImageCardViewPresenter(mContext, themeResId);
+                    break;
+                }
 //                case SIDE_INFO:
 //                    presenter = new SideInfoCardPresenter(mContext);
 //                    break;
@@ -88,6 +89,7 @@ public class CardPresenterSelector extends PresenterSelector {
 //                    break;
                 default:
                     // step - this type for the first screen, the screen in browsefragment
+                    // if we want different style for card, add into this method
                     presenter = new ImageCardViewPresenter(mContext);
                     break;
             }

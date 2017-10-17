@@ -49,6 +49,10 @@
             android:name=".card.ui.cardbrowser.CardExampleActivity"
             android:exported="true"
             android:theme="@style/Theme.Example.LeanbackBrowse"/>
+        <activity
+            android:name=".card.ui.detail.DetailViewExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackDetails"/>
     </application>
 
 </manifest>

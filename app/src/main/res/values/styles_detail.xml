@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Example.LeanbackDetails" parent="Theme.Leanback.Details">
+        <item name="android:colorPrimary">@color/detail_view_actionbar_background</item>
+    </style>
+</resources>

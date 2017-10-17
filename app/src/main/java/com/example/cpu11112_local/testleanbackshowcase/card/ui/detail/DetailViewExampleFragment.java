@@ -1,23 +1,38 @@
 package com.example.cpu11112_local.testleanbackshowcase.card.ui.detail;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v17.leanback.app.DetailsFragment;
 import android.support.v17.leanback.app.DetailsFragmentBackgroundController;
+import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.DetailsOverviewRow;
+import android.support.v17.leanback.widget.FullWidthDetailsOverviewRowPresenter;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.OnItemViewSelectedListener;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v7.graphics.Palette;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.cpu11112_local.testleanbackshowcase.R;
 import com.example.cpu11112_local.testleanbackshowcase.models.DetailedCard;
+import com.example.cpu11112_local.testleanbackshowcase.models.PaletteColors;
 import com.example.cpu11112_local.testleanbackshowcase.utils.CardListRow;
 import com.example.cpu11112_local.testleanbackshowcase.utils.Constant;
+import com.example.cpu11112_local.testleanbackshowcase.utils.PaletteUtils;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,9 +50,7 @@ public class DetailViewExampleFragment extends DetailsFragment implements OnItem
     public static final long ACTION_BUY = 1;
     public static final long ACTION_WISHLIST = 2;
     public static final long ACTION_RELATED = 3;
-    //    private Action mActionBuy;
-//    private Action mActionWishList;
-//    private Action mActionRelated;
+
     @Inject
     @Named(Constant.BIG_ADAPTER)
     ArrayObjectAdapter mRowsAdapter;
@@ -51,11 +64,9 @@ public class DetailViewExampleFragment extends DetailsFragment implements OnItem
     CardListRow cardListRow;
     @Inject
     ListRow listRow;
+    @Inject
+    FullWidthDetailsOverviewRowPresenter mFullWidthDetailsOverviewRowPresenter;
 
-    //    @Inject
-//    FullWidthDetailsOverviewRowPresenter rowPresenter;
-//    @Inject
-//    ListRowPresenter shadowDisabledRowPresenter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
@@ -65,86 +76,59 @@ public class DetailViewExampleFragment extends DetailsFragment implements OnItem
     }
 
     private void setupUi() {
-        // Load the card we want to display from a JSON resource. This JSON data could come from
-        // anywhere in a real world app, e.g. a server.
-//        String json = Utils
-//                .inputStreamToString(getResources().openRawResource(R.raw.detail_example));
-//        DetailedCard data = new Gson().fromJson(json, DetailedCard.class);
-
-        // Setup fragment
         setTitle(getString(R.string.detail_view_title));
-
-//        FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
-//                new DetailsDescriptionPresenter(getActivity())) {
-//
-//            @Override
-//            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
-//                // Customize Actionbar and Content by using custom colors.
-//                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
-//
-//                View actionsView = viewHolder.view.
-//                        findViewById(R.id.details_overview_actions_background);
-//                actionsView.setBackgroundColor(getActivity().getResources().
-//                        getColor(R.color.detail_view_actionbar_background));
-//
-//                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
-//                detailsView.setBackgroundColor(
-//                        getResources().getColor(R.color.detail_view_background));
-//                return viewHolder;
-//            }
-//        };
-
-//        FullWidthDetailsOverviewSharedElementHelper mHelper = new FullWidthDetailsOverviewSharedElementHelper();
-//        mHelper.setSharedElementEnterTransition(getActivity(), TRANSITION_NAME);
-//        rowPresenter.setListener(mHelper);
-//        rowPresenter.setParticipatingEntranceTransition(false);
         prepareEntranceTransition();
-
-//        ListRowPresenter shadowDisabledRowPresenter = new ListRowPresenter();
-//        shadowDisabledRowPresenter.setShadowEnabled(false);
-
-        // Setup PresenterSelector to distinguish between the different rows.
-//        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
-//        rowPresenterSelector.addClassPresenter(DetailsOverviewRow.class, rowPresenter);
-//        rowPresenterSelector.addClassPresenter(CardListRow.class, shadowDisabledRowPresenter);
-//        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-//        mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
-
-        // Setup action and detail row.
-//        DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
         int imageResId = data.getLocalImageResourceId(getActivity());
 
         Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null && extras.containsKey(EXTRA_CARD)) {
             imageResId = extras.getInt(EXTRA_CARD, imageResId);
         }
-        detailsOverview.setImageDrawable(getResources().getDrawable(imageResId, null));
-//        ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
-//
-//        mActionBuy = new Action(ACTION_BUY, getString(R.string.action_buy) + data.getPrice());
-//        mActionWishList = new Action(ACTION_WISHLIST, getString(R.string.action_wishlist));
-//        mActionRelated = new Action(ACTION_RELATED, getString(R.string.action_related));
-//
-//        actionAdapter.add(mActionBuy);
-//        actionAdapter.add(mActionWishList);
-//        actionAdapter.add(mActionRelated);
-//        detailsOverview.setActionsAdapter(actionAdapter);
+//        use glide to show this image -> so we can get the pallete color
+        Glide.with(getActivity())
+                .asBitmap()
+                .load(imageResId)
+                .listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                // FIXME: 10/17/2017 find out why the background color didn't change the color, still have blue depite i didn't set blue to it
+                                PaletteColors colors = PaletteUtils.getPaletteColors(palette);
+                                mFullWidthDetailsOverviewRowPresenter.setActionsBackgroundColor(colors.getStatusBarColor());
+                                mFullWidthDetailsOverviewRowPresenter.setBackgroundColor(colors.getToolbarBackgroundColor());
+                                if (data != null) {
+                                    data.setPaletteColors(colors);
+                                }
+                                detailsOverview.setItem(data);
+                                notifyDetailsChanged();
+                            }
+                        });
+                        return false;
+                    }
+                })
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        // when we have the bitmap, set to the image
+                        detailsOverview.setImageBitmap(getActivity(), resource);
+                    }
+                });
+
+        // step - detail row
         mRowsAdapter.add(detailsOverview);
-
-        // Setup related row.
-//        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
-//                new CardPresenterSelector(getActivity()));
-//        for (Card characterCard : data.getCharacters()) listRowAdapter.add(characterCard);
-//        HeaderItem header = new HeaderItem(0, getString(R.string.header_related));
+        // step - related row
         mRowsAdapter.add(cardListRow);
-
-        // Setup recommended row.
-//        listRowAdapter = new ArrayObjectAdapter(new CardPresenterSelector(getActivity()));
-//        for (Card card : data.getRecommended()) listRowAdapter.add(card);
-//        header = new HeaderItem(1, getString(R.string.header_recommended));
+        // step - recommend row
         mRowsAdapter.add(listRow);
-
         setAdapter(mRowsAdapter);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -152,6 +136,13 @@ public class DetailViewExampleFragment extends DetailsFragment implements OnItem
             }
         }, 500);
         initializeBackground(data);
+    }
+
+    // step - notify the big adapter to change the background color
+    private void notifyDetailsChanged() {
+        // only notify the detail row (not the list under)
+        int index = mRowsAdapter.indexOf(detailsOverview);
+        mRowsAdapter.notifyArrayItemRangeChanged(index, 1);
     }
 
     private void initializeBackground(DetailedCard data) {
@@ -167,11 +158,24 @@ public class DetailViewExampleFragment extends DetailsFragment implements OnItem
 
     @Override
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+        if (!(item instanceof Action)) return;
+        Action action = (Action) item;
 
+        if (action.getId() == ACTION_RELATED) {
+            setSelectedPosition(1);
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.action_cicked), Toast.LENGTH_LONG)
+                    .show();
+        }
     }
 
     @Override
     public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
-
+        if (mRowsAdapter.indexOf(row) > 0) {
+            int backgroundColor = getResources().getColor(R.color.detail_view_related_background);
+            getView().setBackgroundColor(backgroundColor);
+        } else {
+            getView().setBackground(null);
+        }
     }
 }

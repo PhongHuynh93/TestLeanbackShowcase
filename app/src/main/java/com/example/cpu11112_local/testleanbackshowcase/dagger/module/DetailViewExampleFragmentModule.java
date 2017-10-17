@@ -10,9 +10,6 @@ import android.support.v17.leanback.widget.FullWidthDetailsOverviewSharedElement
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
-import android.support.v17.leanback.widget.RowPresenter;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.cpu11112_local.testleanbackshowcase.R;
 import com.example.cpu11112_local.testleanbackshowcase.card.presenters.CardPresenterSelector;
@@ -40,23 +37,6 @@ import static com.example.cpu11112_local.testleanbackshowcase.card.ui.detail.Det
  */
 @Module
 public class DetailViewExampleFragmentModule {
-
-//    @Provides
-//    CardBrowserFragmentView provideMainView(CardExampleFragment mainFragment) {
-//        return mainFragment;
-//    }
-
-//
-//    @Provides
-//    MainPresenter provideMainPresenter(MainView mainView, ApiService apiService) {
-//        return new MainPresenterImpl(mainView, apiService);
-//    }
-
-//    @Provides
-//    PresenterSelector provideSelectorPresenter() {
-//        return new ShadowRowPresenterSelector();
-//    }
-
     @Provides
     DetailsFragmentBackgroundController provideDetailsFragmentBackgroundController(DetailViewExampleFragment fragment) {
         return new DetailsFragmentBackgroundController(fragment);
@@ -64,23 +44,26 @@ public class DetailViewExampleFragmentModule {
 
     @Provides
     FullWidthDetailsOverviewRowPresenter provideFullWidthDetailsOverviewRowPresenter(DetailViewExampleFragment fragment) {
-        FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(new DetailsDescriptionPresenter(fragment.getActivity())) {
-            @Override
-            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
-                // Customize Actionbar and Content by using custom colors.
-                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
-
-                View actionsView = viewHolder.view.
-                        findViewById(R.id.details_overview_actions_background);
-                actionsView.setBackgroundColor(fragment.getActivity().getResources().
-                        getColor(R.color.detail_view_actionbar_background));
-
-                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
-                detailsView.setBackgroundColor(
-                        fragment.getActivity().getResources().getColor(R.color.detail_view_background));
-                return viewHolder;
-            }
-        };
+        // // step: 10/17/2017 we add the createRowViewHOlder to change the color of the background
+        FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(new DetailsDescriptionPresenter(fragment.getActivity()));
+//        {
+//            @Override
+//            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
+//                // Customize Actionbar and Content by using custom colors.
+//                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
+//
+////               // FIXME: 10/17/2017 not set these 2 colors is blue for all type, set the pallete color like in movie detail
+//                View actionsView = viewHolder.view.
+//                        findViewById(R.id.details_overview_actions_background);
+//                actionsView.setBackgroundColor(fragment.getActivity().getResources().
+//                        getColor(R.color.detail_view_actionbar_background));
+//
+//                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
+//                detailsView.setBackgroundColor(
+//                        fragment.getActivity().getResources().getColor(R.color.detail_view_background));
+//                return viewHolder;
+//            }
+//        };
 
         FullWidthDetailsOverviewSharedElementHelper mHelper = new FullWidthDetailsOverviewSharedElementHelper();
         mHelper.setSharedElementEnterTransition(fragment.getActivity(), TRANSITION_NAME);
@@ -103,6 +86,7 @@ public class DetailViewExampleFragmentModule {
         return new ListRowPresenter();
     }
 
+    // step - in detail screen, we have 3 rows
     @Provides
     ClassPresenterSelector provideClassPresenterSelector(FullWidthDetailsOverviewRowPresenter rowPresenter, @Named(Constant.ROW_NOT_SHADOW) ListRowPresenter shadowDisabledRowPresenter, @Named(Constant.ROW_SHADOW) ListRowPresenter shadowEnabledRowPresenter) {
         ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
@@ -120,6 +104,7 @@ public class DetailViewExampleFragmentModule {
 
     @Provides
     DetailedCard provideDetailedCard(DetailViewExampleFragment fragment) {
+        // step we can get the data from intent because we have fragment
         String json = Utils
                 .inputStreamToString(fragment.getResources().openRawResource(R.raw.detail_example));
         DetailedCard data = new Gson().fromJson(json, DetailedCard.class);
@@ -159,6 +144,7 @@ public class DetailViewExampleFragmentModule {
         return new ListRow(header, listRowAdapter);
     }
 
+    // step - set the data to this to populate the datas into view
     @Provides
     DetailsOverviewRow provideDetailsOverviewRow(DetailedCard data, @Named(Constant.ACTION_ADAPTER) ArrayObjectAdapter actionAdapter) {
         DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);

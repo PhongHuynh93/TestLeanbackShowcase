@@ -31,6 +31,8 @@ public class DetailedCard {
     @SerializedName("year") private int mYear = 0;
     @SerializedName("trailerUrl") private String mTrailerUrl = null;
     @SerializedName("videoUrl") private String mVideoUrl = null;
+    // pelette color from the image show in detail fragment
+    private PaletteColors mPaletteColors;
 
 
     public String getPrice() {
@@ -76,5 +78,9 @@ public class DetailedCard {
     public int getLocalImageResourceId(Context context) {
         return context.getResources()
                       .getIdentifier(getLocalImageResource(), "drawable", context.getPackageName());
+    }
+
+    public void setPaletteColors(PaletteColors paletteColors) {
+        mPaletteColors = paletteColors;
     }
 }

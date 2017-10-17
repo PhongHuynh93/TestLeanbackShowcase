@@ -51,9 +51,9 @@ public class CardPresenterSelector extends PresenterSelector {
                 case SINGLE_LINE:
                     presenter = new SingleLineCardPresenter(mContext);
                     break;
-//                case VIDEO_GRID:
-//                    presenter = new VideoCardViewPresenter(mContext, R.style.VideoGridCardTheme);
-//                    break;
+                case VIDEO_GRID:
+                    presenter = new VideoCardViewPresenter(mContext, R.style.VideoGridCardTheme);
+                    break;
                 case MOVIE:
                 case MOVIE_BASE:
                 case MOVIE_COMPLETE:
@@ -75,18 +75,18 @@ public class CardPresenterSelector extends PresenterSelector {
                     presenter = new ImageCardViewPresenter(mContext, themeResId);
                     break;
                 }
-//                case SIDE_INFO:
-//                    presenter = new SideInfoCardPresenter(mContext);
-//                    break;
-//                case TEXT:
-//                    presenter = new TextCardPresenter(mContext);
-//                    break;
-//                case ICON:
-//                    presenter = new IconCardPresenter(mContext);
-//                    break;
-//                case CHARACTER:
-//                    presenter = new CharacterCardPresenter(mContext);
-//                    break;
+                case SIDE_INFO:
+                    presenter = new SideInfoCardPresenter(mContext);
+                    break;
+                case TEXT:
+                    presenter = new TextCardPresenter(mContext);
+                    break;
+                case ICON:
+                    presenter = new IconCardPresenter(mContext);
+                    break;
+                case CHARACTER:
+                    presenter = new CharacterCardPresenter(mContext);
+                    break;
                 default:
                     // step - this type for the first screen, the screen in browsefragment
                     // if we want different style for card, add into this method

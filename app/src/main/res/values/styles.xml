@@ -33,9 +33,6 @@
         <item name="imageCardViewInfoAreaStyle">@style/SingleLineCardInfoAreaStyle</item>
     </style>
 
-    <style name="SingleLineCardStyle" parent="DefaultCardStyle">
-        <item name="lbImageCardViewType">Title</item>
-    </style>
     <!-- Squared single line card with colored footer style. Used in cards example. -->
     <style name="SingleLineCardTitleStyle" parent="Widget.Leanback.ImageCardView.TitleStyle">
         <item name="android:textAlignment">center</item>
@@ -59,7 +56,7 @@
         <item name="defaultSearchBrightColor">@color/search_bright_color</item>
     </style>
 
-    <!--info - style for movie card-->
+    <!--info - style for ImageCardView-->
     <!-- Theme corresponding to the MovieCardSimpleStyle -->
     <style name="MovieCardSimpleTheme" parent="Theme.Leanback">
         <item name="imageCardViewStyle">@style/MovieCardTitleOnlyStyle</item>
@@ -78,9 +75,6 @@
     <style name="MovieCardContentGoneStyle" parent="Widget.Leanback.ImageCardView.ContentStyle">
         <item name="android:visibility">invisible</item>
     </style>
-    <style name="MovieCardCompleteStyle" parent="MovieCardTitleOnlyStyle">
-        <item name="lbImageCardViewType">Title|Content|IconOnLeft</item>
-    </style>
     <style name="MovieCardTitleTwoLineStyle" parent="Widget.Leanback.ImageCardView.TitleStyle">
         <item name="android:maxLines">2</item>
         <item name="android:minLines">2</item>
@@ -96,14 +90,7 @@
     </style>
 
     <!--info one-->
-    <style name="MovieCardTitleOnlyStyle" parent="Widget.Leanback.ImageCardViewStyle">
-        <item name="lbImageCardViewType">Title</item>
-        <item name="cardBackground">@null</item>
-    </style>
-    <style name="MovieCardImageStyle" parent="Widget.Leanback.ImageCardView.ImageStyle">
-        <item name="android:layout_width">@dimen/movie_image_card_width</item>
-        <item name="android:layout_height">@dimen/movie_image_card_height</item>
-    </style>
+
 
     <!--info two-->
     <!-- Theme corresponding to the MovieCardBasicStyle -->
@@ -150,14 +137,92 @@
         <item name="imageCardViewBadgeStyle">@style/GameCardBadgeStyle</item>
         <item name="imageCardViewImageStyle">@style/DefaultCardImageStyle</item>
     </style>
-    <style name="GameCardStyle" parent="DefaultCardStyle">
-        <item name="lbImageCardViewType">Title|Content|IconOnRight</item>
-    </style>
+
     <!-- Game card styles with custom Badge icon. Used in cards example. -->
     <style name="GameCardContentStyle" parent="Widget.Leanback.ImageCardView.ContentStyle">
         <item name="android:textColor">#80c349</item>
     </style>
     <style name="GameCardBadgeStyle" parent="Widget.Leanback.ImageCardView.BadgeStyle">
         <item name="android:src">@drawable/ic_installed</item>
+    </style>
+
+    <!--step - style for image in imageview-->
+    <style name="MovieCardImageStyle" parent="Widget.Leanback.ImageCardView.ImageStyle">
+        <item name="android:layout_width">@dimen/movie_image_card_width</item>
+        <item name="android:layout_height">@dimen/movie_image_card_height</item>
+    </style>
+
+    <!--step - type of card in ImageCardView-->
+    <style name="GameCardStyle" parent="DefaultCardStyle">
+        <item name="lbImageCardViewType">Title|Content|IconOnRight</item>
+    </style>
+    <!--card only have title-->
+    <style name="SingleLineCardStyle" parent="DefaultCardStyle">
+        <item name="lbImageCardViewType">Title</item>
+    </style>
+    <style name="MovieCardTitleOnlyStyle" parent="Widget.Leanback.ImageCardViewStyle">
+        <item name="lbImageCardViewType">Title</item>
+        <item name="cardBackground">@null</item>
+    </style>
+    <style name="MovieCardCompleteStyle" parent="MovieCardTitleOnlyStyle">
+        <item name="lbImageCardViewType">Title|Content|IconOnLeft</item>
+    </style>
+
+    <!--step - card with the position of the content relative to the image-->
+    <style name="SideInfoCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
+        <!--info
+         mainOnly: the iinfo in on the right
+        infoUnder: the content is under the image
+        infoOver: the content is above the image
+        -->
+        <item name="cardType">mainOnly</item>
+        <item name="cardBackground">@null</item>
+    </style>
+
+    <!-- TextCardView. used in cards example -->
+    <style name="TextCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
+        <item name="cardBackground">@null</item>
+    </style>
+
+    <!-- step - Theme corresponding to the IconCardStyle -->
+    <style name="IconCardTheme" parent="Theme.Leanback">
+        <item name="imageCardViewStyle">@style/IconCardViewStyle</item>
+        <item name="imageCardViewTitleStyle">@style/IconCardTitleStyle</item>
+        <item name="imageCardViewImageStyle">@style/IconCardImageStyle</item>
+        <item name="imageCardViewInfoAreaStyle">@style/IconCardInfoAreaStyle</item>
+    </style>
+    <!-- Icon card style with custom focus handler. Used in cards example. -->
+    <style name="IconCardViewStyle" parent="DefaultCardStyle">
+        <item name="lbImageCardViewType">Title</item>
+    </style>
+    <style name="IconCardTitleStyle" parent="Widget.Leanback.ImageCardView.TitleStyle">
+        <item name="android:maxLines">2</item>
+        <item name="android:minLines">2</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="IconCardImageStyle" parent="Widget.Leanback.ImageCardView.ImageStyle">
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_height">96dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+    <style name="IconCardInfoAreaStyle" parent="Widget.Leanback.ImageCardView.InfoAreaStyle">
+        <item name="android:layout_width">96dp</item>
+        <item name="android:background">@null</item>
+        <item name="layout_viewType">main</item>
+    </style>
+
+    <!-- step CharacterCardView. used in details example -->
+    <style name="CharacterCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
+        <item name="cardBackground">@null</item>
+    </style>
+
+    <!-- step - Theme used for styling video cards in the vertical grid view -->
+    <style name="VideoGridCardTheme" parent="Theme.Leanback">
+        <item name="imageCardViewStyle">@style/GridCardStyle</item>
+        <item name="imageCardViewImageStyle">@style/VideoGridCardImageStyle</item>
+    </style>
+    <style name="VideoGridCardImageStyle" parent="Widget.Leanback.ImageCardView.ImageStyle">
+        <item name="android:layout_width">190dp</item>
+        <item name="android:layout_height">105dp</item>
     </style>
 </resources>

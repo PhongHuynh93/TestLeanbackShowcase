@@ -5,20 +5,16 @@ import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.Row;
 import android.webkit.WebViewFragment;
 
+import static com.example.cpu11112_local.testleanbackshowcase.utils.Constant.HEADER_ID_1;
+import static com.example.cpu11112_local.testleanbackshowcase.utils.Constant.HEADER_ID_2;
+import static com.example.cpu11112_local.testleanbackshowcase.utils.Constant.HEADER_ID_3;
+import static com.example.cpu11112_local.testleanbackshowcase.utils.Constant.HEADER_ID_4;
+
 /**
  * Created by CPU11112-local on 10/18/2017.
  */
 
 public class PageRowFragmentFactory extends BrowseFragment.FragmentFactory {
-    private static final long HEADER_ID_1 = 1;
-    private static final String HEADER_NAME_1 = "Page Fragment";
-    private static final long HEADER_ID_2 = 2;
-    private static final String HEADER_NAME_2 = "Rows Fragment";
-    private static final long HEADER_ID_3 = 3;
-    private static final String HEADER_NAME_3 = "Settings Fragment";
-    private static final long HEADER_ID_4 = 4;
-    private static final String HEADER_NAME_4 = "User agreement Fragment";
-
     @Override
     public Fragment createFragment(Object rowObj) {
         Row row = (Row)rowObj;

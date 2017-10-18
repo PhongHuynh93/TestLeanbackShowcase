@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.cpu11112_local.testleanbackshowcase.R;
+import com.example.cpu11112_local.testleanbackshowcase.utils.Constant;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import dagger.android.AndroidInjection;
 
@@ -21,6 +23,19 @@ import dagger.android.AndroidInjection;
 public class PageAndListRowFragment extends BrowseFragment {
     @Inject
     ArrayObjectAdapter mRowsAdapter;
+    @Inject
+    @Named(Constant.PAGE_1)
+    PageRow mPageRow1;
+    @Inject
+    @Named(Constant.PAGE_2)
+    PageRow mPageRow2;
+    @Inject
+    @Named(Constant.PAGE_3)
+    PageRow mPageRow3;
+    @Inject
+    @Named(Constant.PAGE_4)
+    PageRow mPageRow4;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +47,10 @@ public class PageAndListRowFragment extends BrowseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                createRows();
+                mRowsAdapter.add(mPageRow1);
+                mRowsAdapter.add(mPageRow2);
+                mRowsAdapter.add(mPageRow3);
+                mRowsAdapter.add(mPageRow4);
                 startEntranceTransition();
             }
         }, 2000);
@@ -57,9 +75,5 @@ public class PageAndListRowFragment extends BrowseFragment {
         });
 
         prepareEntranceTransition();
-    }
-
-    private void createRows() {
-
     }
 }

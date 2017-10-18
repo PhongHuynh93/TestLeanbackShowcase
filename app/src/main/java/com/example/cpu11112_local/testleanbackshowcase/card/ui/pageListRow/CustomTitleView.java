@@ -68,16 +68,16 @@ public class CustomTitleView extends RelativeLayout implements TitleViewAdapter.
     };
 
     public CustomTitleView(Context context) {
-        super(context, null);
+        this(context, null);
     }
 
     public CustomTitleView(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
+        this(context, attrs, 0);
     }
 
     public CustomTitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mDataBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.custom_titleview, this, false);
+        mDataBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.custom_titleview, this, true);
     }
 
     public void setTitle(CharSequence title) {

@@ -1,5 +1,7 @@
 package com.example.cpu11112_local.testleanbackshowcase.utils;
 
+import android.support.v17.leanback.widget.FocusHighlight;
+
 /**
  * Created by CPU11112-local on 10/17/2017.
  */
@@ -26,4 +28,9 @@ public class Constant {
     public static final String PAGE_2 = "PAGE_2";
     public static final String PAGE_3 = "PAGE_3";
     public static final String PAGE_4 = "PAGE_4";
+
+    // grid
+   public static final int ZOOM_FACTOR = FocusHighlight.ZOOM_FACTOR_MEDIUM;
+   public static final int COLUMNS = 4;
+
 }

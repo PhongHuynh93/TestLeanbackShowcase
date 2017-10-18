@@ -15,9 +15,9 @@ import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v4.app.ActivityOptionsCompat;
 
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.cardbrowser.CardExampleActivity;
-import com.example.cpu11112_local.testleanbackshowcase.card.ui.detail.DetailViewExampleActivity;
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.grid.GridExampleActivity;
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow.PageAndListRowActivity;
+import com.example.cpu11112_local.testleanbackshowcase.card.ui.video.VideoGridExampleActivity;
 import com.example.cpu11112_local.testleanbackshowcase.models.Card;
 import com.example.cpu11112_local.testleanbackshowcase.models.CardRow;
 import com.example.cpu11112_local.testleanbackshowcase.utils.Utils;

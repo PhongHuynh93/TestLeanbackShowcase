@@ -15,6 +15,7 @@ import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v4.app.ActivityOptionsCompat;
 
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.cardbrowser.CardExampleActivity;
+import com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow.PageAndListRowActivity;
 import com.example.cpu11112_local.testleanbackshowcase.models.Card;
 import com.example.cpu11112_local.testleanbackshowcase.models.CardRow;
 import com.example.cpu11112_local.testleanbackshowcase.utils.Utils;
@@ -90,6 +91,12 @@ public class MainFragment extends BrowseFragment implements MainView {
             switch (id) {
                 case 0:
                     intent = new Intent(getActivity().getBaseContext(), CardExampleActivity.class);
+                    break;
+                case 1:
+                    intent = new Intent(getActivity().getBaseContext(), PageAndListRowActivity.class);
+                    break;
+                default:
+                    break;
             }
 
             if (intent != null) {

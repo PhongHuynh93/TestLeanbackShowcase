@@ -54,6 +54,10 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Example.LeanbackDetails"/>
+        <activity
+            android:name=".card.ui.pageListRow.PageAndListRowActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.Leanback.CustomTitle"/>
     </application>
 
 </manifest>

@@ -11,11 +11,12 @@ import android.support.v17.leanback.widget.VerticalGridPresenter;
 import android.widget.Toast;
 
 import com.example.cpu11112_local.testleanbackshowcase.R;
-import com.example.cpu11112_local.testleanbackshowcase.card.presenters.CardPresenterSelector;
 import com.example.cpu11112_local.testleanbackshowcase.models.Card;
 import com.example.cpu11112_local.testleanbackshowcase.models.CardRow;
 import com.example.cpu11112_local.testleanbackshowcase.utils.Utils;
 import com.google.gson.Gson;
+
+import javax.inject.Inject;
 
 /**
  * Created by CPU11112-local on 10/18/2017.
@@ -24,7 +25,8 @@ import com.google.gson.Gson;
 public class SampleFragmentA extends GridFragment {
     private static final int COLUMNS = 4;
     private final int ZOOM_FACTOR = FocusHighlight.ZOOM_FACTOR_SMALL;
-    private ArrayObjectAdapter mAdapter;
+    @Inject
+    ArrayObjectAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,14 +36,13 @@ public class SampleFragmentA extends GridFragment {
         getMainFragmentAdapter().getFragmentHost().notifyDataReady(getMainFragmentAdapter());
     }
 
-
     private void setupAdapter() {
         VerticalGridPresenter presenter = new VerticalGridPresenter(ZOOM_FACTOR);
         presenter.setNumberOfColumns(COLUMNS);
         setGridPresenter(presenter);
 
-        CardPresenterSelector cardPresenter = new CardPresenterSelector(getActivity());
-        mAdapter = new ArrayObjectAdapter(cardPresenter);
+//        CardPresenterSelector cardPresenter = new CardPresenterSelector(getActivity());
+//        mAdapter = new ArrayObjectAdapter(cardPresenter);
         setAdapter(mAdapter);
 
         setOnItemViewClickedListener(new OnItemViewClickedListener() {
@@ -51,9 +52,9 @@ public class SampleFragmentA extends GridFragment {
                     Object item,
                     RowPresenter.ViewHolder rowViewHolder,
                     Row row) {
-                Card card = (Card)item;
+                Card card = (Card) item;
                 Toast.makeText(getActivity(),
-                        "Clicked on "+card.getTitle(),
+                        "Clicked on " + card.getTitle(),
                         Toast.LENGTH_SHORT).show();
             }
         });

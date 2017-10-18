@@ -58,6 +58,10 @@
             android:name=".card.ui.pageListRow.PageAndListRowActivity"
             android:exported="true"
             android:theme="@style/Theme.Example.Leanback.CustomTitle"/>
+        <activity
+            android:name=".card.ui.grid.GridExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackVerticalGrid"/>
     </application>
 
 </manifest>

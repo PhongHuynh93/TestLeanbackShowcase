@@ -11,8 +11,9 @@ import java.util.HashMap;
 
 /**
  * Created by CPU11112-local on 10/16/2017.
+ * info - need to create the selector for all project, depend on type to select the suitable presenter, very useful when we make solid
  */
-// TODO: 10/16/2017 implement choose the correct presenter
+// : 10/16/2017 implement choose the correct presenter
     // if not implemented, not show the datas into the screen
 public class CardPresenterSelector extends PresenterSelector {
     private final Context mContext;

@@ -5,6 +5,7 @@ import com.example.cpu11112_local.testleanbackshowcase.card.ui.cardbrowser.CardE
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.detail.DetailViewExampleFragment;
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow.GridFragment;
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow.PageAndListRowFragment;
+import com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow.SampleFragmentA;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -28,4 +29,7 @@ public abstract class FragmentBuilder {
 
     @ContributesAndroidInjector(modules = GridModule.class)
     abstract GridFragment bindGridFragment();
+
+    @ContributesAndroidInjector(modules = SampleAModule.class)
+    abstract SampleFragmentA bindSampleFragmentA();
 }

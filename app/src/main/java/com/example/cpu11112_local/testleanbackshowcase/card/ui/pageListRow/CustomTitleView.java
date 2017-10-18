@@ -19,10 +19,51 @@ import com.example.cpu11112_local.testleanbackshowcase.databinding.CustomTitlevi
 public class CustomTitleView extends RelativeLayout implements TitleViewAdapter.Provider {
     private CustomTitleviewBinding mDataBinding;
 
+    // step - need this adapter to auto show/hide the title in the toolbar
     private TitleViewAdapter mAdapter = new TitleViewAdapter() {
         @Override
         public View getSearchAffordanceView() {
             return mDataBinding.searchOrb;
+        }
+
+
+        @Override
+        public void setTitle(CharSequence titleText) {
+            CustomTitleView.this.setTitle(titleText);
+        }
+
+        @Override
+        public void setBadgeDrawable(Drawable drawable) {
+            //CustomTitleView.this.setBadgeDrawable(drawable);
+        }
+
+        @Override
+        public void setOnSearchClickedListener(OnClickListener listener) {
+            mDataBinding.searchOrb.setOnClickListener(listener);
+        }
+
+        @Override
+        public void updateComponentsVisibility(int flags) {
+            /*if ((flags & BRANDING_VIEW_VISIBLE) == BRANDING_VIEW_VISIBLE) {
+                updateBadgeVisibility(true);
+            } else {
+                mAnalogClockView.setVisibility(View.GONE);
+                mTitleView.setVisibility(View.GONE);
+            }*/
+
+            int visibility = (flags & SEARCH_VIEW_VISIBLE) == SEARCH_VIEW_VISIBLE
+                    ? View.VISIBLE : View.INVISIBLE;
+            mDataBinding.searchOrb.setVisibility(visibility);
+        }
+
+        private void updateBadgeVisibility(boolean visible) {
+            if (visible) {
+                mDataBinding.clock.setVisibility(View.VISIBLE);
+                mDataBinding.titleTv.setVisibility(View.VISIBLE);
+            } else {
+                mDataBinding.clock.setVisibility(View.GONE);
+                mDataBinding.titleTv.setVisibility(View.GONE);
+            }
         }
     };
 

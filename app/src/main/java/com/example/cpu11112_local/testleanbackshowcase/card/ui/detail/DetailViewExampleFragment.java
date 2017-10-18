@@ -152,7 +152,7 @@ public class DetailViewExampleFragment extends DetailsFragment implements OnItem
     }
 
     private void setupEventListeners() {
-        setOnItemViewSelectedListener(this);
+//        setOnItemViewSelectedListener(this);
         setOnItemViewClickedListener(this);
     }
 
@@ -172,6 +172,7 @@ public class DetailViewExampleFragment extends DetailsFragment implements OnItem
     @Override
     public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
         if (mRowsAdapter.indexOf(row) > 0) {
+            // FIXME: 10/18/2017 what does this method do, change what background
             int backgroundColor = getResources().getColor(R.color.detail_view_related_background);
             getView().setBackgroundColor(backgroundColor);
         } else {

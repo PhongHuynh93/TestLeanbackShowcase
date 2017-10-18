@@ -10,6 +10,9 @@ import android.support.v17.leanback.widget.FullWidthDetailsOverviewSharedElement
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
+import android.support.v17.leanback.widget.RowPresenter;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.cpu11112_local.testleanbackshowcase.R;
 import com.example.cpu11112_local.testleanbackshowcase.card.presenters.CardPresenterSelector;
@@ -45,25 +48,26 @@ public class DetailViewExampleFragmentModule {
     @Provides
     FullWidthDetailsOverviewRowPresenter provideFullWidthDetailsOverviewRowPresenter(DetailViewExampleFragment fragment) {
         // // step: 10/17/2017 we add the createRowViewHOlder to change the color of the background
-        FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(new DetailsDescriptionPresenter(fragment.getActivity()));
-//        {
-//            @Override
-//            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
-//                // Customize Actionbar and Content by using custom colors.
-//                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
-//
-////               // FIXME: 10/17/2017 not set these 2 colors is blue for all type, set the pallete color like in movie detail
-//                View actionsView = viewHolder.view.
-//                        findViewById(R.id.details_overview_actions_background);
-//                actionsView.setBackgroundColor(fragment.getActivity().getResources().
-//                        getColor(R.color.detail_view_actionbar_background));
-//
-//                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
-//                detailsView.setBackgroundColor(
-//                        fragment.getActivity().getResources().getColor(R.color.detail_view_background));
-//                return viewHolder;
-//            }
-//        };
+        // note: need to add the DetailsOverviewLogoPresenter into this presenter to make the logo live in the correct position
+//        CustomMovieDetailPresenter rowPresenter = new CustomMovieDetailPresenter(new DetailsDescriptionPresenter(fragment.getActivity()), new DetailsOverviewLogoPresenter());
+        FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(new DetailsDescriptionPresenter(fragment.getActivity())) {
+            @Override
+            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
+                // Customize Actionbar and Content by using custom colors.
+                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
+
+//               // FIXME: 10/17/2017 not set these 2 colors is blue for all type, set the pallete color like in movie detail
+                View actionsView = viewHolder.view.
+                        findViewById(R.id.details_overview_actions_background);
+                actionsView.setBackgroundColor(fragment.getActivity().getResources().
+                        getColor(R.color.detail_view_actionbar_background));
+
+                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
+                detailsView.setBackgroundColor(
+                        fragment.getActivity().getResources().getColor(R.color.detail_view_background));
+                return viewHolder;
+            }
+        };
 
         FullWidthDetailsOverviewSharedElementHelper mHelper = new FullWidthDetailsOverviewSharedElementHelper();
         mHelper.setSharedElementEnterTransition(fragment.getActivity(), TRANSITION_NAME);

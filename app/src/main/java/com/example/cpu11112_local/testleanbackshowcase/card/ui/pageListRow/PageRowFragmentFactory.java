@@ -3,7 +3,6 @@ package com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow;
 import android.app.Fragment;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.Row;
-import android.webkit.WebViewFragment;
 
 import static com.example.cpu11112_local.testleanbackshowcase.utils.Constant.HEADER_ID_1;
 import static com.example.cpu11112_local.testleanbackshowcase.utils.Constant.HEADER_ID_2;

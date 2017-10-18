@@ -6,6 +6,7 @@ import com.example.cpu11112_local.testleanbackshowcase.card.ui.detail.DetailView
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow.GridFragment;
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow.PageAndListRowFragment;
 import com.example.cpu11112_local.testleanbackshowcase.card.ui.pageListRow.SampleFragmentA;
+import com.example.cpu11112_local.testleanbackshowcase.card.ui.video.VideoGridExampleFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -32,4 +33,7 @@ public abstract class FragmentBuilder {
 
     @ContributesAndroidInjector(modules = SampleAModule.class)
     abstract SampleFragmentA bindSampleFragmentA();
+
+    @ContributesAndroidInjector(modules = VideoGridExampleBuilder.class)
+    abstract VideoGridExampleFragment bindVideoGridExampleFragment();
 }

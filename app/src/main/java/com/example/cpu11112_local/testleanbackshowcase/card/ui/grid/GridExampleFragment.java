@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 /**
  * Created by CPU11112-local on 10/18/2017.
  * note - we can see the different between VerticalGridFragment and GridFragment we created it custom
+ * info - VerticalGridFragment is so simple -> use this instead of GridFragment
  */
 
 public class GridExampleFragment extends VerticalGridFragment {

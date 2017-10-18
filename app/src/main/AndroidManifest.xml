@@ -62,6 +62,10 @@
             android:name=".card.ui.grid.GridExampleActivity"
             android:exported="true"
             android:theme="@style/Theme.Example.LeanbackVerticalGrid"/>
+        <activity
+            android:name=".card.ui.video.VideoGridExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackVerticalGrid"/>
     </application>
 
 </manifest>

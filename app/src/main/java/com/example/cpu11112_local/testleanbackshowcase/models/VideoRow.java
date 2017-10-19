@@ -9,8 +9,11 @@ import java.util.List;
  * Created by CPU11112-local on 10/19/2017.
  */
 
-public class VideoResponse {
-    @SerializedName("googlevideos")
+public class VideoRow {
+    @SerializedName("category")
     @Expose
-    public List<VideoRow> googlevideos = null;
+    public String category;
+    @SerializedName("videos")
+    @Expose
+    public List<VideoCard> videos = null;
 }

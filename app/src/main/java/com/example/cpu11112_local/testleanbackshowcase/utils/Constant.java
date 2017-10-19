@@ -33,4 +33,11 @@ public class Constant {
    public static final int ZOOM_FACTOR = FocusHighlight.ZOOM_FACTOR_MEDIUM;
    public static final int COLUMNS = 4;
 
+    // retrofit
+    public static final int CONNECT_TIMEOUT = 15;
+    public static final int WRITE_TIMEOUT = 60;
+    public static final int TIMEOUT = 60;
+    public static final String CACHE_DIR = "HttpResponseCache";
+    public static final long CACHE_SIZE = 10 * 1024 * 1024;    // 10 MB
+
 }
